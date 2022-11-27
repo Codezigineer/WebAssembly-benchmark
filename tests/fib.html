@@ -8,11 +8,17 @@ textarea {
 </style>
 <script src="fib.js"></script>
 <script id="js_code">
-function jsFib(n) {
+function _jsFib(stdlib, ffi, heap) {
+  "use asm";
+  function jsFi(n) {
   if (n === 1) return 1;
   if (n === 2) return 1;
-  return jsFib(n-1) + jsFib(n-2);
+  return jsFi(n-1) + jsFi(n-2);
+  }
+  return jsFi;
 }
+  
+var jsFib = _jsFib({}, {}, {});
 </script>
 <script id="ws_instantiate_code">
 var module, functions = {};
