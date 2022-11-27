@@ -8,7 +8,9 @@ textarea {
 </style>
 <script src="collisionDetection.js"></script>
 <script id="js_code">
-function jsCollisionDetection(positions, radiuses, res, n) {
+function _jsCollisionDetection(stdlib, ffi, heap) {
+  "use asm";
+  function jsCollisionDetectio(positions, radiuses, res, n) {
   var count = 0;
   for (var i = 0; i < n; i++) {
     var p = positions[i];
@@ -20,7 +22,7 @@ function jsCollisionDetection(positions, radiuses, res, n) {
       var dx = p.x - p2.x;
       var dy = p.y - p2.y;
       var dz = p.z - p2.z;
-      var d = Math.sqrt(dx*dx + dy*dy + dz*dz);
+      var d = stdlib.Math.sqrt(dx*dx + dy*dy + dz*dz);
       if (r > d) {
         collision = 1;
         count++;
@@ -37,6 +39,11 @@ function jsCollisionDetection(positions, radiuses, res, n) {
   }
   return count;
 }
+  return jsCollisionDetectio;
+};
+
+  
+let jsCollisionDetection = _jsCollisionDetection(); 
 </script>
 <script id="ws_instantiate_code">
 var module, functions = {};
